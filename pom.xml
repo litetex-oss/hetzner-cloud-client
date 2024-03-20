@@ -5,13 +5,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.litetex</groupId>
-	<artifactId>standard-maven-template-root</artifactId>
+	<artifactId>hetzner-cloud-client-root</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>standard-maven-template</module>
-		<module>standard-maven-template-demo</module>
+		<module>hetzner-cloud-client</module>
+		<module>hetzner-cloud-client-demo</module>
 	</modules>
 
 	<licenses>

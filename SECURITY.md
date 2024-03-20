@@ -2,4 +2,4 @@
 
 ## Reporting a Vulnerability
 
-Please report a security vulnerability [on GitHub Security Advisories](https://github.com/litetex-oss/standard-maven-template/security/advisories/new).
+Please report a security vulnerability [on GitHub Security Advisories](https://github.com/litetex-oss/hetzner-cloud-client/security/advisories/new).

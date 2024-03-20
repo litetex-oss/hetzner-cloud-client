@@ -31,10 +31,10 @@ You should have the following things installed:
   * Ensure that the JDK/Java-Version is correct
 
 
-## Releasing [![Build](https://img.shields.io/github/actions/workflow/status/litetex-oss/standard-maven-template/release.yml?branch=master)](https://github.com/litetex-oss/standard-maven-template/actions/workflows/release.yml)
+## Releasing [![Build](https://img.shields.io/github/actions/workflow/status/litetex-oss/hetzner-cloud-client/release.yml?branch=master)](https://github.com/litetex-oss/hetzner-cloud-client/actions/workflows/release.yml)
 
 Before releasing:
-* Consider doing a [test-deployment](https://github.com/litetex-oss/standard-maven-template/actions/workflows/test-deploy.yml?query=branch%3Adev) before actually releasing.
+* Consider doing a [test-deployment](https://github.com/litetex-oss/hetzner-cloud-client/actions/workflows/test-deploy.yml?query=branch%3Adev) before actually releasing.
 * Check the [changelog](CHANGELOG.md)
 
 If ``dev`` is ready for release, create a pull request to the ``master``-Branch and merge the changes

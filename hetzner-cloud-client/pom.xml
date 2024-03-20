@@ -5,17 +5,17 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>net.litetex</groupId>
-	<artifactId>standard-maven-template</artifactId>
+	<artifactId>hetzner-cloud-client</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>standard-maven-template</name>
-	<description>standard-maven-template</description>
-	<url>https://github.com/litetex-oss/standard-maven-template</url>
+	<name>hetzner-cloud-client</name>
+	<description>hetzner-cloud-client</description>
+	<url>https://github.com/litetex-oss/hetzner-cloud-client</url>
 
 	<scm>
-		<url>https://github.com/litetex-oss/standard-maven-template</url>
-		<connection>https://github.com/litetex-oss/standard-maven-template.git</connection>
+		<url>https://github.com/litetex-oss/hetzner-cloud-client</url>
+		<connection>https://github.com/litetex-oss/hetzner-cloud-client.git</connection>
 	</scm>
 
 	<inceptionYear>2024</inceptionYear>
