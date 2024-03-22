@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.litetex.hetzner.cloud.pricing.response.LocationPrice;
 import net.litetex.hetzner.cloud.shared.Deprecation;
-import net.litetex.hetzner.cloud.objects.enums.Architecture;
 
 
 /**
@@ -30,7 +29,7 @@ public record ServerType(
     String storageType,
     @JsonProperty("cpu_type")
     String cpuType,
-    Architecture architecture,
+    String architecture,
     @JsonProperty("included_traffic")
     Long includedTraffic
 )
