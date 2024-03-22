@@ -30,6 +30,11 @@ public abstract class NestedReadAPI<
 		this.singleResponseClass = singleResponseClass;
 	}
 	
+	public LIST_RES list()
+	{
+		return this.get("", this.listResponseClass);
+	}
+	
 	public LIST_RES list(final LIST_REQ request)
 	{
 		return this.get(request.applyTo(new RelativeUrlBuilder()).build(), this.listResponseClass);
