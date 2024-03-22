@@ -2,21 +2,33 @@ package net.litetex.hetzner.cloud.firewall.shared;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import jakarta.annotation.Nonnull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import net.litetex.hetzner.cloud.support.IBuilder;
 
 
 public record FirewallRule(
     String description,
     @JsonProperty("destination_ips")
     List<String> destinationIPs,
-    Direction direction,
+    @Nonnull
+    String direction,
     String port,
-    Protocol protocol,
+    @Nonnull
+    String protocol,
     @JsonProperty("source_ips")
     List<String> sourceIPs
 )
 {
+    public FirewallRule
+    {
+        Objects.requireNonNull(direction);
+        Objects.requireNonNull(protocol);
+    }
     
     public static final class Direction
     {
@@ -43,18 +55,14 @@ public record FirewallRule(
     }
     
     
-    public static class Builder
+    public static class Builder implements IBuilder<FirewallRule>
     {
         private String description;
-        private List<String> destinationIPs = new ArrayList<>();
-        private Direction direction;
-        private String port = "";
-        private Protocol protocol;
-        private List<String> sourceIPs = new ArrayList<>();
-        
-        public Builder()
-        {
-        }
+        private List<String> destinationIPs;
+        private String direction;
+        private String port;
+        private String protocol;
+        private List<String> sourceIPs;
         
         public Builder description(final String description)
         {
@@ -68,7 +76,17 @@ public record FirewallRule(
             return this;
         }
         
-        public Builder direction(final Direction direction)
+        public Builder destinationIP(final String destinationIP)
+        {
+            if(this.destinationIPs == null)
+            {
+                this.destinationIPs = new ArrayList<>();
+            }
+            this.destinationIPs.add(destinationIP);
+            return this;
+        }
+        
+        public Builder direction(final String direction)
         {
             this.direction = direction;
             return this;
@@ -80,7 +98,7 @@ public record FirewallRule(
             return this;
         }
         
-        public Builder protocol(final Protocol protocol)
+        public Builder protocol(final String protocol)
         {
             this.protocol = protocol;
             return this;
@@ -92,6 +110,17 @@ public record FirewallRule(
             return this;
         }
         
+        public Builder sourceIP(final String sourceIP)
+        {
+            if(this.sourceIPs == null)
+            {
+				this.sourceIPs = new ArrayList<>();
+            }
+            this.sourceIPs.add(sourceIP);
+            return this;
+        }
+        
+        @Override
         public FirewallRule build()
         {
             return new FirewallRule(

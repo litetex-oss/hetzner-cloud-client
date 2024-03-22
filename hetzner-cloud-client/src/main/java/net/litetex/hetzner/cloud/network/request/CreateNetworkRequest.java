@@ -8,7 +8,6 @@ import java.util.function.Consumer;
 
 import jakarta.annotation.Nonnull;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.litetex.hetzner.cloud.network.shared.Route;

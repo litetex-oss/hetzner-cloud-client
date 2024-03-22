@@ -6,7 +6,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.annotation.Nonnull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.litetex.hetzner.cloud.loadbalancer.shared.LBAlgorithm;
@@ -19,9 +20,11 @@ import net.litetex.hetzner.cloud.support.NameLabelsBuilder;
 public record CreateLoadBalancerRequest(
     LBAlgorithm algorithm,
     Map<String, String> labels,
+    @Nonnull
     @JsonProperty("load_balancer_type")
     String loadBalancerType,
     String location,
+    @Nonnull
     String name,
     Long network,
     @JsonProperty("network_zone")

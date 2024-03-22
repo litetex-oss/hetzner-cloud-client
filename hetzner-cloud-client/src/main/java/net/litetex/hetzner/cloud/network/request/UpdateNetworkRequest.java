@@ -2,7 +2,6 @@ package net.litetex.hetzner.cloud.network.request;
 
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.litetex.hetzner.cloud.support.NameLabelsBuilder;

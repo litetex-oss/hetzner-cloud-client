@@ -1,7 +1,9 @@
 package net.litetex.hetzner.cloud.server.request;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import net.litetex.hetzner.cloud.support.IBuilder;
+
 
 public record ServerPublicNetRequest(
     @JsonProperty("enable_ipv4")
@@ -12,16 +14,12 @@ public record ServerPublicNetRequest(
     Long ipv6
 )
 {
-    public static class Builder
+    public static class Builder implements IBuilder<ServerPublicNetRequest>
     {
         private Boolean enableIPv4;
         private Boolean enableIPv6;
         private Long ipv4;
         private Long ipv6;
-        
-        public Builder()
-        {
-        }
         
         public Builder enableIPv4(final Boolean enableIPv4)
         {
@@ -47,6 +45,7 @@ public record ServerPublicNetRequest(
             return this;
         }
         
+        @Override
         public ServerPublicNetRequest build()
         {
             return new ServerPublicNetRequest(this.enableIPv4, this.enableIPv6, this.ipv4, this.ipv6);

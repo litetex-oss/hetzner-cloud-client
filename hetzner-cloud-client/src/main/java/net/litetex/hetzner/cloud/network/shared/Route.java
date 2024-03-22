@@ -25,10 +25,6 @@ public record Route(
         private String destination;
         private String gateway;
         
-        public Builder()
-        {
-        }
-        
         public Builder destination(final String destination)
         {
             this.destination = destination;

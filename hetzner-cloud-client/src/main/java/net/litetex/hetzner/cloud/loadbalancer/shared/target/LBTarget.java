@@ -8,7 +8,6 @@ import java.util.function.Consumer;
 
 import jakarta.annotation.Nonnull;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.litetex.hetzner.cloud.support.BuilderUtil;
@@ -25,8 +24,8 @@ public record LBTarget(
     @JsonProperty("server")
     LBTargetServer server,
     List<Target> targets,
-    @JsonProperty("type")
     @Nonnull
+    @JsonProperty("type")
     String targetType,
     @JsonProperty("use_private_ip")
     Boolean usePrivateIp

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 import jakarta.annotation.Nonnull;
 
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.litetex.hetzner.cloud.firewall.shared.FWApplicationTarget;
 import net.litetex.hetzner.cloud.firewall.shared.FirewallRule;
+import net.litetex.hetzner.cloud.support.BuilderUtil;
 import net.litetex.hetzner.cloud.support.NameLabelsBuilder;
 
 
@@ -49,6 +51,11 @@ public record CreateFirewallRequest(
             return this;
         }
         
+        public Builder applyTo(final Consumer<FWApplicationTarget.Builder> builderConsumer)
+        {
+            return this.applyTo(BuilderUtil.build(FWApplicationTarget.Builder::new, builderConsumer));
+        }
+        
         public Builder firewallRules(final List<FirewallRule> firewallRules)
         {
             this.firewallRules = firewallRules;
@@ -63,6 +70,11 @@ public record CreateFirewallRequest(
             }
             this.firewallRules.add(firewallRule);
             return this;
+        }
+        
+        public Builder firewallRule(final Consumer<FirewallRule.Builder> builderConsumer)
+        {
+            return this.firewallRule(BuilderUtil.build(FirewallRule.Builder::new, builderConsumer));
         }
         
         @Override

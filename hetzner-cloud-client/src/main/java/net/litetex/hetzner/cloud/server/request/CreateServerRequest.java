@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 import jakarta.annotation.Nonnull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import net.litetex.hetzner.cloud.support.BuilderUtil;
 import net.litetex.hetzner.cloud.support.NameLabelsBuilder;
 
 
@@ -202,6 +204,11 @@ public record CreateServerRequest(
         {
             this.publicNet = publicNet;
             return this;
+        }
+        
+        public Builder publicNet(final Consumer<ServerPublicNetRequest.Builder> builderConsumer)
+        {
+            return this.publicNet(BuilderUtil.build(ServerPublicNetRequest.Builder::new, builderConsumer));
         }
         
         @Override
