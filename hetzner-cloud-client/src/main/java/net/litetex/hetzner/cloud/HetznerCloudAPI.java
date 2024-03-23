@@ -21,6 +21,7 @@ import net.litetex.hetzner.cloud.loadbalancer.LoadBalancersAPI;
 import net.litetex.hetzner.cloud.loadbalancertype.LoadBalancerTypesAPI;
 import net.litetex.hetzner.cloud.location.LocationsAPI;
 import net.litetex.hetzner.cloud.network.NetworksAPI;
+import net.litetex.hetzner.cloud.placementgroup.PlacementGroupsAPI;
 import net.litetex.hetzner.cloud.pricing.PricingAPI;
 import net.litetex.hetzner.cloud.primaryip.PrimaryIPsAPI;
 import net.litetex.hetzner.cloud.server.ServersAPI;
@@ -200,6 +201,11 @@ public class HetznerCloudAPI implements BaseAPI
 	public NetworksAPI networks()
 	{
 		return new NetworksAPI(this);
+	}
+	
+	public PlacementGroupsAPI placementGroups()
+	{
+		return new PlacementGroupsAPI(this);
 	}
 	
 	public PricingAPI pricing()

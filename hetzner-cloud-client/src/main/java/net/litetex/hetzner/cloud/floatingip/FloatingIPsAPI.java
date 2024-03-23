@@ -7,6 +7,7 @@ import net.litetex.hetzner.cloud.floatingip.request.AssignFloatingIPRequest;
 import net.litetex.hetzner.cloud.floatingip.request.CreateFloatingIPRequest;
 import net.litetex.hetzner.cloud.floatingip.request.UpdateFloatingIPRequest;
 import net.litetex.hetzner.cloud.floatingip.response.CreateFloatingIPResponse;
+import net.litetex.hetzner.cloud.floatingip.response.FloatingIP;
 import net.litetex.hetzner.cloud.floatingip.response.FloatingIPResponse;
 import net.litetex.hetzner.cloud.floatingip.response.FloatingIPsResponse;
 import net.litetex.hetzner.cloud.list.request.DefaultListRequest;
@@ -16,7 +17,7 @@ import net.litetex.hetzner.cloud.support.api.NestedCRUDAPI;
 
 
 public class FloatingIPsAPI
-	extends NestedCRUDAPI<FloatingIPsResponse, DefaultListRequest,
+	extends NestedCRUDAPI<FloatingIPsResponse, FloatingIP, DefaultListRequest,
 	FloatingIPResponse,
 	CreateFloatingIPResponse, CreateFloatingIPRequest, CreateFloatingIPRequest.Builder,
 	UpdateFloatingIPRequest, UpdateFloatingIPRequest.Builder>

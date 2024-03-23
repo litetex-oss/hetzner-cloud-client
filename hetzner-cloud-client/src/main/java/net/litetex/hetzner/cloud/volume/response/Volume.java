@@ -7,10 +7,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.litetex.hetzner.cloud.location.response.Location;
 import net.litetex.hetzner.cloud.protection.response.Protection;
+import net.litetex.hetzner.cloud.support.HasID;
 
 
 public record Volume(
-    Long id,
+    long id,
     OffsetDateTime created,
     String name,
     Long server,
@@ -22,6 +23,6 @@ public record Volume(
     Map<String, String> labels,
     String status,
     String format
-)
+) implements HasID
 {
 }

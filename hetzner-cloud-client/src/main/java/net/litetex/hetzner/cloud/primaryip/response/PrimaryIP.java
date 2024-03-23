@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.litetex.hetzner.cloud.datacenter.response.Datacenter;
 import net.litetex.hetzner.cloud.shared.DnsPTR;
+import net.litetex.hetzner.cloud.support.HasID;
 
 
 public record PrimaryIP(
@@ -28,6 +29,6 @@ public record PrimaryIP(
     @JsonProperty("dns_ptr")
     List<DnsPTR> dnsPtr,
     Map<String, String> labels
-)
+) implements HasID
 {
 }

@@ -4,6 +4,7 @@ import net.litetex.hetzner.cloud.HetznerCloudAPI;
 import net.litetex.hetzner.cloud.actions.ActionsAPI;
 import net.litetex.hetzner.cloud.image.request.ListImagesRequest;
 import net.litetex.hetzner.cloud.image.request.UpdateImageRequest;
+import net.litetex.hetzner.cloud.image.response.Image;
 import net.litetex.hetzner.cloud.image.response.ImageResponse;
 import net.litetex.hetzner.cloud.image.response.ImagesResponse;
 import net.litetex.hetzner.cloud.protection.ChangeProtectionAPI;
@@ -12,7 +13,7 @@ import net.litetex.hetzner.cloud.support.api.NestedRUAPI;
 
 
 public class ImagesAPI
-	extends NestedRUAPI<ImagesResponse, ListImagesRequest,
+	extends NestedRUAPI<ImagesResponse, Image, ListImagesRequest,
 	ImageResponse,
 	UpdateImageRequest, UpdateImageRequest.Builder>
 	implements ActionsAPI, ChangeProtectionAPI, DeleteAPI

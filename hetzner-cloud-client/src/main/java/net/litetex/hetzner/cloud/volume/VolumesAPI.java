@@ -14,12 +14,13 @@ import net.litetex.hetzner.cloud.volume.request.AttachVolumeRequest;
 import net.litetex.hetzner.cloud.volume.request.CreateVolumeRequest;
 import net.litetex.hetzner.cloud.volume.request.ResizeVolumeRequest;
 import net.litetex.hetzner.cloud.volume.response.CreateVolumeResponse;
+import net.litetex.hetzner.cloud.volume.response.Volume;
 import net.litetex.hetzner.cloud.volume.response.VolumeResponse;
 import net.litetex.hetzner.cloud.volume.response.VolumesResponse;
 
 
 public class VolumesAPI
-	extends NestedCRUDAPI<VolumesResponse, DefaultListRequest,
+	extends NestedCRUDAPI<VolumesResponse, Volume, DefaultListRequest,
 	VolumeResponse,
 	CreateVolumeResponse, CreateVolumeRequest, CreateVolumeRequest.Builder,
 	NameLabelsRequest, NameLabelsRequest.Builder>

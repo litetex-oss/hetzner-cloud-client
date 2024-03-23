@@ -12,6 +12,7 @@ import net.litetex.hetzner.cloud.loadbalancer.shared.target.LBTarget;
 import net.litetex.hetzner.cloud.loadbalancertype.response.LoadBalancerType;
 import net.litetex.hetzner.cloud.location.response.Location;
 import net.litetex.hetzner.cloud.protection.response.Protection;
+import net.litetex.hetzner.cloud.support.HasID;
 
 
 public record LoadBalancer(
@@ -36,7 +37,7 @@ public record LoadBalancer(
     LBPublicNet publicNet,
     List<LBService> services,
     List<LBTarget> targets
-)
+) implements HasID
 {
     
     public record LBPrivateNet(

@@ -4,14 +4,16 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import net.litetex.hetzner.cloud.support.HasID;
+
 
 public record SSHKey(
-	Long id,
+	long id,
 	String name,
 	String fingerprint,
 	@JsonProperty("public_key")
 	String publicKey,
 	Map<String, String> labels
-)
+) implements HasID
 {
 }

@@ -1,16 +1,19 @@
 package net.litetex.hetzner.cloud.certificate.request;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.litetex.hetzner.cloud.RelativeUrlBuilder;
 import net.litetex.hetzner.cloud.list.request.ListRequest;
 
 
 public class ListCertificatesRequest extends ListRequest<ListCertificatesRequest>
 {
-	protected String type;
+	protected List<String> type = new ArrayList<>();
 	
 	public ListCertificatesRequest type(final String type)
 	{
-		this.type = type;
+		this.type.add(type);
 		return this.self();
 	}
 	
@@ -18,6 +21,6 @@ public class ListCertificatesRequest extends ListRequest<ListCertificatesRequest
 	public RelativeUrlBuilder applyTo(final RelativeUrlBuilder relativeUrlBuilder)
 	{
 		return super.applyTo(relativeUrlBuilder)
-			.queryParam("type", this.type);
+			.queryParams("type", this.type);
 	}
 }

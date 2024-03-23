@@ -3,21 +3,23 @@ package net.litetex.hetzner.cloud.support.api;
 import java.util.function.Supplier;
 
 import net.litetex.hetzner.cloud.list.request.ListRequest;
+import net.litetex.hetzner.cloud.list.response.ListResponse;
 import net.litetex.hetzner.cloud.support.IBuilder;
 
 
 @SuppressWarnings("java:S119")
-public abstract class NestedCRUDAPI<LIST_RES, LIST_REQ extends ListRequest<LIST_REQ>,
+public abstract class NestedCRUDAPI<
+	LIST_RES extends ListResponse<LIST_DATA>, LIST_DATA, LIST_REQ extends ListRequest<LIST_REQ>,
 	SINGLE_RES,
 	CREATE_RES, CREATE_REQ, CREATE_REQ_BUILDER extends IBuilder<CREATE_REQ>,
 	UPDATE_REQ, UPDATE_REQ_BUILDER extends IBuilder<UPDATE_REQ>>
-	extends NestedCRUAPI<LIST_RES, LIST_REQ,
+	extends NestedCRUAPI<LIST_RES, LIST_DATA, LIST_REQ,
 	SINGLE_RES,
 	CREATE_RES, CREATE_REQ, CREATE_REQ_BUILDER,
 	UPDATE_REQ, UPDATE_REQ_BUILDER>
 	implements DeleteAPI
 {
-	public NestedCRUDAPI(
+	protected NestedCRUDAPI(
 		final BaseAPI parentAPI,
 		final String pathPrefix,
 		final Class<LIST_RES> listResponseClass,

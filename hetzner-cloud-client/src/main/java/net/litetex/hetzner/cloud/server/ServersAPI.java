@@ -26,6 +26,7 @@ import net.litetex.hetzner.cloud.server.response.EnableRescueResponse;
 import net.litetex.hetzner.cloud.server.response.MetricsResponse;
 import net.litetex.hetzner.cloud.server.response.RebuildServerResponse;
 import net.litetex.hetzner.cloud.server.response.ResetRootPasswordResponse;
+import net.litetex.hetzner.cloud.server.response.Server;
 import net.litetex.hetzner.cloud.server.response.ServerResponse;
 import net.litetex.hetzner.cloud.server.response.ServersResponse;
 import net.litetex.hetzner.cloud.support.BuilderUtil;
@@ -34,7 +35,7 @@ import net.litetex.hetzner.cloud.support.api.NestedCRUAPI;
 
 
 public class ServersAPI
-	extends NestedCRUAPI<ServersResponse, ListServersRequest,
+	extends NestedCRUAPI<ServersResponse, Server, ListServersRequest,
 	ServerResponse,
 	CreateServerResponse, CreateServerRequest, CreateServerRequest.Builder,
 	NameLabelsRequest, NameLabelsRequest.Builder>

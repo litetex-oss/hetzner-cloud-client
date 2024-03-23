@@ -14,6 +14,7 @@ import net.litetex.hetzner.cloud.loadbalancer.request.LoadBalancerNetworkRequest
 import net.litetex.hetzner.cloud.loadbalancer.request.LoadBalancerTargetRequest;
 import net.litetex.hetzner.cloud.loadbalancer.request.UpdateLoadBalancerServiceRequest;
 import net.litetex.hetzner.cloud.loadbalancer.response.CreateLoadBalancerResponse;
+import net.litetex.hetzner.cloud.loadbalancer.response.LoadBalancer;
 import net.litetex.hetzner.cloud.loadbalancer.response.LoadBalancerResponse;
 import net.litetex.hetzner.cloud.loadbalancer.response.LoadBalancersResponse;
 import net.litetex.hetzner.cloud.loadbalancer.shared.service.LBService;
@@ -24,7 +25,7 @@ import net.litetex.hetzner.cloud.support.api.NestedCRUDAPI;
 
 
 public class LoadBalancersAPI
-	extends NestedCRUDAPI<LoadBalancersResponse, DefaultListRequest,
+	extends NestedCRUDAPI<LoadBalancersResponse, LoadBalancer, DefaultListRequest,
 	LoadBalancerResponse,
 	CreateLoadBalancerResponse, CreateLoadBalancerRequest, CreateLoadBalancerRequest.Builder,
 	NameLabelsRequest, NameLabelsRequest.Builder>

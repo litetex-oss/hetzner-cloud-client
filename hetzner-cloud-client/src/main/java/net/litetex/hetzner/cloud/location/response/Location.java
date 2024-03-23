@@ -2,9 +2,11 @@ package net.litetex.hetzner.cloud.location.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import net.litetex.hetzner.cloud.support.HasID;
+
 
 public record Location(
-	Long id,
+	long id,
 	String name,
 	String description,
 	String country,
@@ -13,6 +15,6 @@ public record Location(
 	Double longitude,
 	@JsonProperty("network_zone")
 	String networkZone
-)
+) implements HasID
 {
 }

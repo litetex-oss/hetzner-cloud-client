@@ -9,6 +9,7 @@ import net.litetex.hetzner.cloud.actions.ActionsAPI;
 import net.litetex.hetzner.cloud.actions.response.ActionsResponse;
 import net.litetex.hetzner.cloud.firewall.request.CreateFirewallRequest;
 import net.litetex.hetzner.cloud.firewall.response.CreateFirewallResponse;
+import net.litetex.hetzner.cloud.firewall.response.Firewall;
 import net.litetex.hetzner.cloud.firewall.response.FirewallResponse;
 import net.litetex.hetzner.cloud.firewall.response.FirewallsResponse;
 import net.litetex.hetzner.cloud.firewall.shared.FWApplicationTarget;
@@ -19,7 +20,7 @@ import net.litetex.hetzner.cloud.support.api.NestedCRUDAPI;
 
 
 public class FirewallsAPI
-	extends NestedCRUDAPI<FirewallsResponse, DefaultListRequest,
+	extends NestedCRUDAPI<FirewallsResponse, Firewall, DefaultListRequest,
 	FirewallResponse,
 	CreateFirewallResponse, CreateFirewallRequest, CreateFirewallRequest.Builder,
 	NameLabelsRequest, NameLabelsRequest.Builder>

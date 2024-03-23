@@ -4,6 +4,8 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
+import net.litetex.hetzner.cloud.support.HasID;
+
 
 public record PlacementGroup(
 	long id,
@@ -12,6 +14,6 @@ public record PlacementGroup(
 	Map<String, String> labels,
 	List<Long> servers,
 	String type
-)
+) implements HasID
 {
 }

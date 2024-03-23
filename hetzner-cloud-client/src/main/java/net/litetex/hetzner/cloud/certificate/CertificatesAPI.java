@@ -4,6 +4,7 @@ import net.litetex.hetzner.cloud.HetznerCloudAPI;
 import net.litetex.hetzner.cloud.actions.response.ActionResponse;
 import net.litetex.hetzner.cloud.certificate.request.CreateCertificateRequest;
 import net.litetex.hetzner.cloud.certificate.request.ListCertificatesRequest;
+import net.litetex.hetzner.cloud.certificate.response.Certificate;
 import net.litetex.hetzner.cloud.certificate.response.CertificateResponse;
 import net.litetex.hetzner.cloud.certificate.response.CertificatesResponse;
 import net.litetex.hetzner.cloud.certificate.response.CreateCertificateResponse;
@@ -12,7 +13,7 @@ import net.litetex.hetzner.cloud.support.api.NestedCRUDAPI;
 
 
 public class CertificatesAPI
-	extends NestedCRUDAPI<CertificatesResponse, ListCertificatesRequest,
+	extends NestedCRUDAPI<CertificatesResponse, Certificate, ListCertificatesRequest,
 	CertificateResponse,
 	CreateCertificateResponse, CreateCertificateRequest, CreateCertificateRequest.Builder,
 	NameLabelsRequest, NameLabelsRequest.Builder>

@@ -9,10 +9,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import net.litetex.hetzner.cloud.location.response.Location;
 import net.litetex.hetzner.cloud.protection.response.Protection;
 import net.litetex.hetzner.cloud.shared.DnsPTR;
+import net.litetex.hetzner.cloud.support.HasID;
 
 
 public record FloatingIP(
-    Long id,
+    long id,
     String name,
     String description,
     String ip,
@@ -27,6 +28,6 @@ public record FloatingIP(
     Protection protection,
     Map<String, String> labels,
     OffsetDateTime created
-)
+) implements HasID
 {
 }

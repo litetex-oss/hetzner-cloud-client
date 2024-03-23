@@ -1,19 +1,22 @@
 package net.litetex.hetzner.cloud.list.request;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.litetex.hetzner.cloud.RelativeUrlBuilder;
 
 
 public abstract class ListRequest<S>
 {
-	protected String sort;
+	protected List<String> sort = new ArrayList<>();
 	protected String name;
 	protected String labelSelector;
-	protected Integer page;
-	protected Integer perPage;
+	protected Long page;
+	protected Long perPage;
 	
 	public S sort(final String sort)
 	{
-		this.sort = sort;
+		this.sort.add(sort);
 		return this.self();
 	}
 	
@@ -29,13 +32,13 @@ public abstract class ListRequest<S>
 		return this.self();
 	}
 	
-	public S page(final Integer page)
+	public S page(final Long page)
 	{
 		this.page = page;
 		return this.self();
 	}
 	
-	public S perPage(final Integer perPage)
+	public S perPage(final Long perPage)
 	{
 		this.perPage = perPage;
 		return this.self();
@@ -44,7 +47,7 @@ public abstract class ListRequest<S>
 	public RelativeUrlBuilder applyTo(final RelativeUrlBuilder relativeUrlBuilder)
 	{
 		return relativeUrlBuilder
-			.queryParam("sort", this.sort)
+			.queryParams("sort", this.sort)
 			.queryParam("name", this.name)
 			.queryParam("label_selector", this.labelSelector)
 			.queryParam("page", this.page)

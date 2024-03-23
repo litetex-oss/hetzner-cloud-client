@@ -9,10 +9,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import net.litetex.hetzner.cloud.network.shared.Route;
 import net.litetex.hetzner.cloud.network.shared.Subnet;
 import net.litetex.hetzner.cloud.protection.response.Protection;
+import net.litetex.hetzner.cloud.support.HasID;
 
 
 public record Network(
-    Long id,
+    long id,
     String name,
     @JsonProperty("ip_range")
     String ipRange,
@@ -25,7 +26,8 @@ public record Network(
     Map<String, String> labels,
     OffsetDateTime created,
     @JsonProperty("expose_routes_to_vswitch")
-    Boolean exposeRoutesToVswitch)
+    Boolean exposeRoutesToVswitch
+) implements HasID
 {
     
 }

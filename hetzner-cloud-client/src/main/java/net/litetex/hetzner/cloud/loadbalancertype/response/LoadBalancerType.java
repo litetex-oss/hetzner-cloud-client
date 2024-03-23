@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.litetex.hetzner.cloud.pricing.response.LocationPrice;
+import net.litetex.hetzner.cloud.support.HasID;
 
 
 public record LoadBalancerType(
@@ -22,6 +23,6 @@ public record LoadBalancerType(
     long maxAssignedCertificates,
     OffsetDateTime deprecated,
     List<LocationPrice> prices
-)
+) implements HasID
 {
 }

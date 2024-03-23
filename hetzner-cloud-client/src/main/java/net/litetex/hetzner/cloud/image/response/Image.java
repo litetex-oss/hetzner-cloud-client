@@ -6,10 +6,11 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.litetex.hetzner.cloud.protection.response.Protection;
+import net.litetex.hetzner.cloud.support.HasID;
 
 
 public record Image(
-    Long id,
+    long id,
     String type,
     String status,
     String name,
@@ -33,7 +34,8 @@ public record Image(
     OffsetDateTime deprecated,
     Protection protection,
     Map<String, String> labels,
-    String architecture)
+    String architecture
+) implements HasID
 {
     public record CreatedFrom(
         Long id,

@@ -11,6 +11,7 @@ import net.litetex.hetzner.cloud.network.request.CreateNetworkRequest;
 import net.litetex.hetzner.cloud.network.request.DeleteSubnetFromNetwork;
 import net.litetex.hetzner.cloud.network.request.NetworkRouteRequest;
 import net.litetex.hetzner.cloud.network.request.UpdateNetworkRequest;
+import net.litetex.hetzner.cloud.network.response.Network;
 import net.litetex.hetzner.cloud.network.response.NetworkResponse;
 import net.litetex.hetzner.cloud.network.response.NetworksResponse;
 import net.litetex.hetzner.cloud.protection.ChangeProtectionAPI;
@@ -19,7 +20,7 @@ import net.litetex.hetzner.cloud.support.api.NestedCRUDAPI;
 
 
 public class NetworksAPI
-	extends NestedCRUDAPI<NetworksResponse, DefaultListRequest,
+	extends NestedCRUDAPI<NetworksResponse, Network, DefaultListRequest,
 	NetworkResponse,
 	NetworkResponse, CreateNetworkRequest, CreateNetworkRequest.Builder,
 	UpdateNetworkRequest, UpdateNetworkRequest.Builder>

@@ -1,32 +1,35 @@
 package net.litetex.hetzner.cloud.image.request;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.litetex.hetzner.cloud.RelativeUrlBuilder;
 import net.litetex.hetzner.cloud.list.request.ListRequest;
 
 
 public class ListImagesRequest extends ListRequest<ListImagesRequest>
 {
-	protected String type;
-	protected String status;
-	protected String boundTo;
+	protected List<String> type = new ArrayList<>();
+	protected List<String> status = new ArrayList<>();
+	protected List<String> boundTo = new ArrayList<>();
 	protected Boolean includeDeprecated;
 	protected String architecture;
 	
 	public ListImagesRequest type(final String type)
 	{
-		this.type = type;
+		this.type.add(type);
 		return this.self();
 	}
 	
 	public ListImagesRequest status(final String status)
 	{
-		this.status = status;
+		this.status.add(status);
 		return this.self();
 	}
 	
 	public ListImagesRequest boundTo(final String boundTo)
 	{
-		this.boundTo = boundTo;
+		this.boundTo.add(boundTo);
 		return this.self();
 	}
 	
@@ -46,9 +49,9 @@ public class ListImagesRequest extends ListRequest<ListImagesRequest>
 	public RelativeUrlBuilder applyTo(final RelativeUrlBuilder relativeUrlBuilder)
 	{
 		return super.applyTo(relativeUrlBuilder)
-			.queryParam("type", this.type)
-			.queryParam("status", this.status)
-			.queryParam("bound_to", this.boundTo)
+			.queryParams("type", this.type)
+			.queryParams("status", this.status)
+			.queryParams("bound_to", this.boundTo)
 			.queryParam("include_deprecated", this.includeDeprecated)
 			.queryParam("architecture", this.architecture);
 	}

@@ -8,17 +8,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.litetex.hetzner.cloud.firewall.shared.FWApplicationTarget;
 import net.litetex.hetzner.cloud.firewall.shared.FirewallRule;
+import net.litetex.hetzner.cloud.support.HasID;
 
 
 public record Firewall(
+    long id,
+    String name,
     @JsonProperty("applied_to")
     List<FWApplicationTarget> appliedTo,
     OffsetDateTime created,
-    Long id,
     Map<String, String> labels,
-    String name,
     @JsonProperty("rules")
     List<FirewallRule> firewallRules
-)
+) implements HasID
 {
 }

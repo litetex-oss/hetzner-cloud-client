@@ -1,15 +1,18 @@
 package net.litetex.hetzner.cloud.support.api;
 
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import net.litetex.hetzner.cloud.FetchHelper;
 import net.litetex.hetzner.cloud.RelativeUrlBuilder;
 import net.litetex.hetzner.cloud.list.request.ListRequest;
+import net.litetex.hetzner.cloud.list.response.ListResponse;
 
 
 @SuppressWarnings("java:S119")
 public abstract class NestedReadAPI<
-	LIST_RES, LIST_REQ extends ListRequest<LIST_REQ>,
+	LIST_RES extends ListResponse<LIST_DATA>, LIST_DATA, LIST_REQ extends ListRequest<LIST_REQ>,
 	SINGLE_RES>
 	extends NestedAPI
 {
@@ -32,7 +35,17 @@ public abstract class NestedReadAPI<
 	
 	public LIST_RES list()
 	{
-		return this.get("", this.listResponseClass);
+		return this.list((Consumer<LIST_REQ>)null);
+	}
+	
+	public LIST_RES list(final Consumer<LIST_REQ> requestConsumer)
+	{
+		final LIST_REQ req = this.listRequestSupplier.get();
+		if(requestConsumer != null)
+		{
+			requestConsumer.accept(req);
+		}
+		return this.list(req);
 	}
 	
 	public LIST_RES list(final LIST_REQ request)
@@ -40,11 +53,44 @@ public abstract class NestedReadAPI<
 		return this.get(request.applyTo(new RelativeUrlBuilder()).build(), this.listResponseClass);
 	}
 	
-	public LIST_RES list(final Consumer<LIST_REQ> requestConsumer)
+	public List<LIST_RES> listAll()
+	{
+		return this.listAll((Consumer<LIST_REQ>)null);
+	}
+	
+	public List<LIST_RES> listAll(final Consumer<LIST_REQ> requestConsumer)
 	{
 		final LIST_REQ req = this.listRequestSupplier.get();
-		requestConsumer.accept(req);
-		return this.list(req);
+		if(requestConsumer != null)
+		{
+			requestConsumer.accept(req);
+		}
+		return this.listAll(req);
+	}
+	
+	public List<LIST_RES> listAll(final LIST_REQ request)
+	{
+		return FetchHelper.fetchUntilEnd(request, this::list);
+	}
+	
+	public List<LIST_DATA> listAllData()
+	{
+		return this.listAllData((Consumer<LIST_REQ>)null);
+	}
+	
+	public List<LIST_DATA> listAllData(final Consumer<LIST_REQ> requestConsumer)
+	{
+		final LIST_REQ req = this.listRequestSupplier.get();
+		if(requestConsumer != null)
+		{
+			requestConsumer.accept(req);
+		}
+		return this.listAllData(req);
+	}
+	
+	public List<LIST_DATA> listAllData(final LIST_REQ request)
+	{
+		return FetchHelper.fetchDataUntilEnd(request, this::list);
 	}
 	
 	public SINGLE_RES get(final long id)

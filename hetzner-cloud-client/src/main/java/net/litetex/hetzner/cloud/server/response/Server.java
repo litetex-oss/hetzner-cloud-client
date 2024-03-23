@@ -12,10 +12,11 @@ import net.litetex.hetzner.cloud.iso.response.ISO;
 import net.litetex.hetzner.cloud.placementgroup.response.PlacementGroup;
 import net.litetex.hetzner.cloud.protection.response.Protection;
 import net.litetex.hetzner.cloud.servertype.reponse.ServerType;
+import net.litetex.hetzner.cloud.support.HasID;
 
 
 public record Server(
-    Long id,
+    long id,
     String name,
     String status,
     OffsetDateTime created,
@@ -48,6 +49,6 @@ public record Server(
     List<Long> loadBalancers,
     @JsonProperty("placement_group")
     PlacementGroup placementGroup
-)
+) implements HasID
 {
 }

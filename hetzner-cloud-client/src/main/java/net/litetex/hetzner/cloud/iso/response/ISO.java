@@ -1,17 +1,16 @@
 package net.litetex.hetzner.cloud.iso.response;
 
 import net.litetex.hetzner.cloud.shared.Deprecation;
-import net.litetex.hetzner.cloud.shared.Meta;
+import net.litetex.hetzner.cloud.support.HasID;
 
 
 public record ISO(
-    Long id,
+	long id,
     String name,
     String description,
     String type,
-    Meta meta,
     String architecture,
     Deprecation deprecation
-)
+) implements HasID
 {
 }

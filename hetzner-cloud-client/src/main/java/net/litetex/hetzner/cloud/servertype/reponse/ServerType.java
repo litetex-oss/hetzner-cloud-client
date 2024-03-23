@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import net.litetex.hetzner.cloud.pricing.response.LocationPrice;
 import net.litetex.hetzner.cloud.shared.Deprecation;
+import net.litetex.hetzner.cloud.support.HasID;
 
 
 /**
@@ -15,7 +16,7 @@ import net.litetex.hetzner.cloud.shared.Deprecation;
  *                   instead
  */
 public record ServerType(
-    Long id,
+    long id,
     String name,
     String description,
     Long cores,
@@ -32,6 +33,6 @@ public record ServerType(
     String architecture,
     @JsonProperty("included_traffic")
     Long includedTraffic
-)
+) implements HasID
 {
 }

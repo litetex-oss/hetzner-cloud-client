@@ -9,6 +9,7 @@ import net.litetex.hetzner.cloud.primaryip.request.CreatePrimaryIPRequest;
 import net.litetex.hetzner.cloud.primaryip.request.ListPrimaryIPsRequest;
 import net.litetex.hetzner.cloud.primaryip.request.UpdatePrimaryIPRequest;
 import net.litetex.hetzner.cloud.primaryip.response.CreatePrimaryIPResponse;
+import net.litetex.hetzner.cloud.primaryip.response.PrimaryIP;
 import net.litetex.hetzner.cloud.primaryip.response.PrimaryIPResponse;
 import net.litetex.hetzner.cloud.primaryip.response.PrimaryIPsResponse;
 import net.litetex.hetzner.cloud.protection.ChangeProtectionAPI;
@@ -18,7 +19,7 @@ import net.litetex.hetzner.cloud.support.api.NestedCRUDAPI;
 
 
 public class PrimaryIPsAPI
-	extends NestedCRUDAPI<PrimaryIPsResponse, ListPrimaryIPsRequest,
+	extends NestedCRUDAPI<PrimaryIPsResponse, PrimaryIP, ListPrimaryIPsRequest,
 	PrimaryIPResponse,
 	CreatePrimaryIPResponse, CreatePrimaryIPRequest, CreatePrimaryIPRequest.Builder,
 	UpdatePrimaryIPRequest, UpdatePrimaryIPRequest.Builder>

@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public record Meta(Pagination pagination)
 {
 	public record Pagination(
-		Long page,
+		long page,
 		@JsonProperty("per_page")
-		Long perPage,
+		long perPage,
 		@JsonProperty("previous_page")
 		Long previousPage,
 		@JsonProperty("next_page")

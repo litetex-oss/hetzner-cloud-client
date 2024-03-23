@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import net.litetex.hetzner.cloud.support.HasID;
+
 
 public record Certificate(
     long id,
@@ -24,7 +26,7 @@ public record Certificate(
     List<CertificateUsers> usedBy,
     @JsonProperty("type")
     String certificateType
-)
+) implements HasID
 {
     public record CertificateUsers(
         long id,

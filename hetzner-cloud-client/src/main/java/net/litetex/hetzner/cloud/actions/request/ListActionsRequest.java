@@ -1,16 +1,26 @@
 package net.litetex.hetzner.cloud.actions.request;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.litetex.hetzner.cloud.RelativeUrlBuilder;
 import net.litetex.hetzner.cloud.list.request.ListRequest;
 
 
 public class ListActionsRequest extends ListRequest<ListActionsRequest>
 {
-	protected String status;
+	protected List<Long> id = new ArrayList<>();
+	protected List<String> status = new ArrayList<>();
+	
+	public ListActionsRequest id(final long id)
+	{
+		this.id.add(id);
+		return this.self();
+	}
 	
 	public ListActionsRequest status(final String status)
 	{
-		this.status = status;
+		this.status.add(status);
 		return this.self();
 	}
 	
@@ -18,6 +28,7 @@ public class ListActionsRequest extends ListRequest<ListActionsRequest>
 	public RelativeUrlBuilder applyTo(final RelativeUrlBuilder relativeUrlBuilder)
 	{
 		return super.applyTo(relativeUrlBuilder)
-			.queryParam("status", this.status);
+			.queryParams("id", this.id)
+			.queryParams("status", this.status);
 	}
 }
