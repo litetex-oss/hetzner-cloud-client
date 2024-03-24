@@ -67,6 +67,11 @@ public record CreatePrimaryIPRequest(
             return this;
         }
         
+        public Builder datacenter(final Long datacenter)
+        {
+            return this.datacenter(String.valueOf(datacenter));
+        }
+        
         public Builder ipType(final String ipType)
         {
             this.ipType = ipType;

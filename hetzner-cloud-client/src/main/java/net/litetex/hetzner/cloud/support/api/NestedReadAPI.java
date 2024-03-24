@@ -8,12 +8,14 @@ import net.litetex.hetzner.cloud.FetchHelper;
 import net.litetex.hetzner.cloud.RelativeUrlBuilder;
 import net.litetex.hetzner.cloud.list.request.ListRequest;
 import net.litetex.hetzner.cloud.list.response.ListResponse;
+import net.litetex.hetzner.cloud.list.response.SingleResponse;
+import net.litetex.hetzner.cloud.support.HasID;
 
 
 @SuppressWarnings("java:S119")
 public abstract class NestedReadAPI<
-	LIST_RES extends ListResponse<LIST_DATA>, LIST_DATA, LIST_REQ extends ListRequest<LIST_REQ>,
-	SINGLE_RES>
+	LIST_RES extends ListResponse<DATA>, DATA extends HasID, LIST_REQ extends ListRequest<LIST_REQ>,
+	SINGLE_RES extends SingleResponse<DATA>>
 	extends NestedAPI
 {
 	protected final Class<LIST_RES> listResponseClass;
@@ -73,12 +75,12 @@ public abstract class NestedReadAPI<
 		return FetchHelper.fetchUntilEnd(request, this::list);
 	}
 	
-	public List<LIST_DATA> listAllData()
+	public List<DATA> listAllData()
 	{
 		return this.listAllData((Consumer<LIST_REQ>)null);
 	}
 	
-	public List<LIST_DATA> listAllData(final Consumer<LIST_REQ> requestConsumer)
+	public List<DATA> listAllData(final Consumer<LIST_REQ> requestConsumer)
 	{
 		final LIST_REQ req = this.listRequestSupplier.get();
 		if(requestConsumer != null)
@@ -88,7 +90,7 @@ public abstract class NestedReadAPI<
 		return this.listAllData(req);
 	}
 	
-	public List<LIST_DATA> listAllData(final LIST_REQ request)
+	public List<DATA> listAllData(final LIST_REQ request)
 	{
 		return FetchHelper.fetchDataUntilEnd(request, this::list);
 	}

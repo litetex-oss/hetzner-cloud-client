@@ -38,10 +38,20 @@ public abstract class ListRequest<S>
 		return this.self();
 	}
 	
+	public S page(final long page)
+	{
+		return this.page((Long)page);
+	}
+	
 	public S perPage(final Long perPage)
 	{
 		this.perPage = perPage;
 		return this.self();
+	}
+	
+	public S perPage(final long perPage)
+	{
+		return this.perPage((Long)perPage);
 	}
 	
 	public RelativeUrlBuilder applyTo(final RelativeUrlBuilder relativeUrlBuilder)

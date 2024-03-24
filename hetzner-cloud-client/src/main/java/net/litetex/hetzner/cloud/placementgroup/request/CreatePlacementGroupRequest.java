@@ -7,6 +7,7 @@ import jakarta.annotation.Nonnull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import net.litetex.hetzner.cloud.placementgroup.shared.PlacementGroupType;
 import net.litetex.hetzner.cloud.support.NameLabelsBuilder;
 
 
@@ -27,7 +28,7 @@ public record CreatePlacementGroupRequest(
     
     public static class Builder extends NameLabelsBuilder<Builder, CreatePlacementGroupRequest>
     {
-        private String placementGroupType;
+        private String placementGroupType = PlacementGroupType.SPREAD;
         
         public Builder placementGroupType(final String placementGroupType)
         {

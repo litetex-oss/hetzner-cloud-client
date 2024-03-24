@@ -1,5 +1,15 @@
 package net.litetex.hetzner.cloud.iso.response;
 
-public record ISOResponse(ISO iso)
+import net.litetex.hetzner.cloud.list.response.SingleResponse;
+
+
+public record ISOResponse(
+	ISO iso
+) implements SingleResponse<ISO>
 {
+	@Override
+	public ISO data()
+	{
+		return this.iso();
+	}
 }

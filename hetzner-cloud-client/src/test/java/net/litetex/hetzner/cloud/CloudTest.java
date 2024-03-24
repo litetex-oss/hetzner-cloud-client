@@ -15,13 +15,13 @@ import net.litetex.hetzner.cloud.support.api.NestedAPI;
 import net.litetex.hetzner.cloud.support.api.NestedReadAPI;
 
 
-public abstract class HetznerCloudTest<A extends NestedAPI>
+public abstract class CloudTest<A extends NestedAPI>
 {
 	protected static AtomicBoolean initialClean = new AtomicBoolean(false);
 	protected HetznerCloudAPI hetznerCloudAPI;
 	protected final A api;
 	
-	public HetznerCloudTest(final Function<HetznerCloudAPI, A> apiFunction)
+	public CloudTest(final Function<HetznerCloudAPI, A> apiFunction)
 	{
 		this.hetznerCloudAPI = new HetznerCloudAPI(Optional.ofNullable(System.getenv("API-KEY"))
 			.orElseGet(() -> System.getProperty("API-KEY")));
@@ -56,15 +56,14 @@ public abstract class HetznerCloudTest<A extends NestedAPI>
 		deleteAll(this.hetznerCloudAPI.volumes());
 	}
 	
-	protected static <A extends NestedReadAPI<? extends ListResponse<T>, T, ?, ?> & DeleteAPI, T extends HasID> void deleteAll(
-		final A api)
+	protected static <A extends NestedReadAPI<? extends ListResponse<T>, T, ?, ?> & DeleteAPI,
+		T extends HasID> void deleteAll(final A api)
 	{
 		deleteAll(api, (a, t) -> a.delete(t.id()));
 	}
 	
-	protected static <A extends NestedReadAPI<? extends ListResponse<T>, T, ?, ?>, T> void deleteAll(
-		final A api,
-		final BiConsumer<A, T> deleteFunc)
+	protected static <A extends NestedReadAPI<? extends ListResponse<T>, T, ?, ?>,
+		T extends HasID> void deleteAll(final A api, final BiConsumer<A, T> deleteFunc)
 	{
 		api.listAllData().forEach(t -> deleteFunc.accept(api, t));
 	}

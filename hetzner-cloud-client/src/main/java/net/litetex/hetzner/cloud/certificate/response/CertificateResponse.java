@@ -1,5 +1,15 @@
 package net.litetex.hetzner.cloud.certificate.response;
 
-public record CertificateResponse(Certificate certificate)
+import net.litetex.hetzner.cloud.list.response.SingleResponse;
+
+
+public record CertificateResponse(
+	Certificate certificate
+) implements SingleResponse<Certificate>
 {
+	@Override
+	public Certificate data()
+	{
+		return this.certificate();
+	}
 }

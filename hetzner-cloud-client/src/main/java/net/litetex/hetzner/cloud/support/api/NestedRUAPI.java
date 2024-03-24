@@ -5,15 +5,17 @@ import java.util.function.Supplier;
 
 import net.litetex.hetzner.cloud.list.request.ListRequest;
 import net.litetex.hetzner.cloud.list.response.ListResponse;
+import net.litetex.hetzner.cloud.list.response.SingleResponse;
+import net.litetex.hetzner.cloud.support.HasID;
 import net.litetex.hetzner.cloud.support.IBuilder;
 
 
 @SuppressWarnings("java:S119")
 public abstract class NestedRUAPI<
-	LIST_RES extends ListResponse<LIST_DATA>, LIST_DATA, LIST_REQ extends ListRequest<LIST_REQ>,
-	SINGLE_RES,
+	LIST_RES extends ListResponse<DATA>, DATA extends HasID, LIST_REQ extends ListRequest<LIST_REQ>,
+	SINGLE_RES extends SingleResponse<DATA>,
 	UPDATE_REQ, UPDATE_REQ_BUILDER extends IBuilder<UPDATE_REQ>>
-	extends NestedReadAPI<LIST_RES, LIST_DATA, LIST_REQ, SINGLE_RES>
+	extends NestedReadAPI<LIST_RES, DATA, LIST_REQ, SINGLE_RES>
 {
 	protected final Class<UPDATE_REQ> updateRequestClass;
 	protected final Supplier<UPDATE_REQ_BUILDER> updateRequestBuilderSupplier;

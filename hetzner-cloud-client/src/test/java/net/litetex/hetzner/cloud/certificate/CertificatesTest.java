@@ -6,13 +6,14 @@ import java.io.UncheckedIOException;
 import java.math.BigInteger;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
+import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import org.bouncycastle.asn1.oiw.OIWObjectIdentifiers;
 import org.bouncycastle.asn1.x500.X500Name;
@@ -22,6 +23,7 @@ import org.bouncycastle.asn1.x509.BasicConstraints;
 import org.bouncycastle.asn1.x509.Extension;
 import org.bouncycastle.asn1.x509.SubjectKeyIdentifier;
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
+import org.bouncycastle.cert.CertIOException;
 import org.bouncycastle.cert.X509ExtensionUtils;
 import org.bouncycastle.cert.X509v3CertificateBuilder;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateConverter;
@@ -30,67 +32,93 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openssl.jcajce.JcaPEMWriter;
 import org.bouncycastle.operator.ContentSigner;
 import org.bouncycastle.operator.DigestCalculator;
+import org.bouncycastle.operator.OperatorCreationException;
 import org.bouncycastle.operator.bc.BcDigestCalculatorProvider;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 import net.litetex.hetzner.cloud.APIRequestException;
+import net.litetex.hetzner.cloud.CRUDTest;
 import net.litetex.hetzner.cloud.HetznerCloudAPI;
-import net.litetex.hetzner.cloud.HetznerCloudTest;
 import net.litetex.hetzner.cloud.certificate.response.Certificate;
-import net.litetex.hetzner.cloud.certificate.response.CertificateResponse;
 import net.litetex.hetzner.cloud.certificate.response.CreateCertificateResponse;
 
 
-class CertificatesTest extends HetznerCloudTest<CertificatesAPI>
+@SuppressWarnings("java:S2187") // Test are in parent
+class CertificatesTest extends CRUDTest<CertificatesAPI, Certificate>
 {
+	private static final String KEY_ID = "test";
+	
 	public CertificatesTest()
 	{
 		super(HetznerCloudAPI::certificates);
 	}
 	
-	@Test
-	void check() throws Exception
+	@Override
+	protected Certificate create()
 	{
-		final String keyId = UUID.randomUUID().toString();
-		
-		final KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-		keyPairGenerator.initialize(4096);
-		final KeyPair keyPair = keyPairGenerator.generateKeyPair();
-		final X509Certificate certificate;
-		certificate = this.generateCertificate(keyPair, "SHA256withRSA", "test.example.com");
-		
-		final String privateKey = String.format(
-			"-----BEGIN PRIVATE KEY-----\n%s\n-----END PRIVATE KEY-----",
-			Base64.getMimeEncoder(64, System.lineSeparator().getBytes())
-				.encodeToString(keyPair.getPrivate().getEncoded()));
-		final String publicKey = this.convertCertificateToPem(certificate);
-		
-		final CreateCertificateResponse createCertificateResponse = this.api.create(b -> b
-			.name(keyId)
-			.privateKey(privateKey)
-			.certificate(publicKey)
-			.build());
-		
-		final long certId = createCertificateResponse.certificate().id();
-		Assertions.assertNotNull(createCertificateResponse.certificate());
-		Assertions.assertTrue(certId > 0);
-		
-		final List<Certificate> allCertificates = this.api.listAllData();
+		try
+		{
+			final KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+			keyPairGenerator.initialize(4096);
+			final KeyPair keyPair = keyPairGenerator.generateKeyPair();
+			final X509Certificate certificate = this.generateCertificate(keyPair, "SHA256withRSA", "test.example.com");
+			
+			final String privateKey = String.format(
+				"-----BEGIN PRIVATE KEY-----\n%s\n-----END PRIVATE KEY-----",
+				Base64.getMimeEncoder(64, System.lineSeparator().getBytes())
+					.encodeToString(keyPair.getPrivate().getEncoded()));
+			final String publicKey = this.convertCertificateToPem(certificate);
+			
+			final CreateCertificateResponse createCertificateResponse = this.api.create(b -> b
+				.name(KEY_ID)
+				.privateKey(privateKey)
+				.certificate(publicKey)
+				.build());
+			
+			final long certId = createCertificateResponse.certificate().id();
+			Assertions.assertNotNull(createCertificateResponse.certificate());
+			Assertions.assertTrue(certId > 0);
+			
+			return createCertificateResponse.certificate();
+		}
+		catch(final NoSuchAlgorithmException | OperatorCreationException | CertificateException | CertIOException e)
+		{
+			throw new IllegalStateException(e);
+		}
+	}
+	
+	@Override
+	protected void update(final Certificate created)
+	{
+		this.api.update(created.id(), b -> b.label("x", "y"));
+	}
+	
+	@Override
+	protected List<Certificate> list()
+	{
+		final List<Certificate> allCertificates = super.list();
 		Assertions.assertEquals(1, allCertificates.size());
-		Assertions.assertEquals(certId, allCertificates.get(0).id());
+		return allCertificates;
+	}
+	
+	@Override
+	protected Certificate get(final Long id)
+	{
+		final Certificate certificate = super.get(id);
+		Assertions.assertEquals(KEY_ID, certificate.name());
+		Assertions.assertEquals("y", certificate.labels().get("x"));
+		return certificate;
+	}
+	
+	@Override
+	protected void delete(final Certificate created)
+	{
+		final long id = created.id();
+		this.api.delete(id);
 		
-		this.api.update(certId, b -> b.label("x", "y"));
-		
-		final CertificateResponse certificateResponse = this.api.get(certId);
-		Assertions.assertEquals(keyId, certificateResponse.certificate().name());
-		Assertions.assertEquals("y", certificateResponse.certificate().labels().get("x"));
-		
-		this.api.delete(certId);
-		
-		Assertions.assertThrows(APIRequestException.class, () -> this.api.get(certId));
+		Assertions.assertThrows(APIRequestException.class, () -> this.api.get(id));
 	}
 	
 	@AfterEach
@@ -100,7 +128,7 @@ class CertificatesTest extends HetznerCloudTest<CertificatesAPI>
 	}
 	
 	private X509Certificate generateCertificate(final KeyPair keyPair, final String hashAlgorithm, final String cn)
-		throws Exception
+		throws OperatorCreationException, CertificateException, CertIOException
 	{
 		final Date notBefore = java.sql.Timestamp.valueOf(LocalDateTime.now());
 		final Date notAfter = java.sql.Timestamp.valueOf(LocalDateTime.now().plusYears(2));
@@ -124,7 +152,7 @@ class CertificatesTest extends HetznerCloudTest<CertificatesAPI>
 			.setProvider(new BouncyCastleProvider()).getCertificate(certificateBuilder.build(contentSigner));
 	}
 	
-	private SubjectKeyIdentifier createSubjectKeyId(final PublicKey publicKey) throws Exception
+	private SubjectKeyIdentifier createSubjectKeyId(final PublicKey publicKey) throws OperatorCreationException
 	{
 		final SubjectPublicKeyInfo publicKeyInfo = SubjectPublicKeyInfo.getInstance(publicKey.getEncoded());
 		final DigestCalculator digCalc =
@@ -133,7 +161,7 @@ class CertificatesTest extends HetznerCloudTest<CertificatesAPI>
 		return new X509ExtensionUtils(digCalc).createSubjectKeyIdentifier(publicKeyInfo);
 	}
 	
-	private AuthorityKeyIdentifier createAuthorityKeyId(final PublicKey publicKey) throws Exception
+	private AuthorityKeyIdentifier createAuthorityKeyId(final PublicKey publicKey) throws OperatorCreationException
 	{
 		final SubjectPublicKeyInfo publicKeyInfo = SubjectPublicKeyInfo.getInstance(publicKey.getEncoded());
 		final DigestCalculator digCalc =

@@ -98,6 +98,11 @@ public record FirewallRule(
             return this;
         }
         
+        public Builder port(final Integer port)
+        {
+            return this.port(String.valueOf(port));
+        }
+        
         public Builder protocol(final String protocol)
         {
             this.protocol = protocol;
