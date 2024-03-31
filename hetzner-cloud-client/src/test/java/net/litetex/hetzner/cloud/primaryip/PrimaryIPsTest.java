@@ -1,6 +1,5 @@
 package net.litetex.hetzner.cloud.primaryip;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 
 import net.litetex.hetzner.cloud.CRUDTest;
@@ -40,17 +39,5 @@ class PrimaryIPsTest extends CRUDTest<PrimaryIPsAPI, PrimaryIP>
 		Assertions.assertTrue(primaryIP.autoDelete());
 		Assertions.assertEquals("test", primaryIP.name());
 		return primaryIP;
-	}
-	
-	@Override
-	protected void delete(final PrimaryIP created)
-	{
-		this.api.delete(created.id());
-	}
-	
-	@AfterEach
-	void afterEach()
-	{
-		deleteAll(this.api);
 	}
 }

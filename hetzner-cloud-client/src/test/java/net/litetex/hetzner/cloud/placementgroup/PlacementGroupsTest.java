@@ -1,6 +1,5 @@
 package net.litetex.hetzner.cloud.placementgroup;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 
 import net.litetex.hetzner.cloud.CRUDTest;
@@ -36,17 +35,5 @@ class PlacementGroupsTest extends CRUDTest<PlacementGroupsAPI, PlacementGroup>
 		Assertions.assertEquals("test", placementGroup.name());
 		Assertions.assertEquals("y", placementGroup.labels().get("x"));
 		return placementGroup;
-	}
-	
-	@Override
-	protected void delete(final PlacementGroup created)
-	{
-		this.api.delete(created.id());
-	}
-	
-	@AfterEach
-	void afterEach()
-	{
-		deleteAll(this.api);
 	}
 }

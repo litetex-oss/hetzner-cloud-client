@@ -1,6 +1,5 @@
 package net.litetex.hetzner.cloud.sshkey;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 
 import net.litetex.hetzner.cloud.CRUDTest;
@@ -37,17 +36,5 @@ class SSHKeysTest extends CRUDTest<SSHKeysAPI, SSHKey>
 		Assertions.assertEquals("58:3b:bb:86:a4:bc:f3:74:8c:17:72:bc:86:00:8d:3e", sshKey.fingerprint());
 		Assertions.assertEquals("y", sshKey.labels().get("x"));
 		return sshKey;
-	}
-	
-	@Override
-	protected void delete(final SSHKey created)
-	{
-		this.api.delete(created.id());
-	}
-	
-	@AfterEach
-	void afterEach()
-	{
-		deleteAll(this.api);
 	}
 }

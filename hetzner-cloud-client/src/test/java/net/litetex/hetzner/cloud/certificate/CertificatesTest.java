@@ -35,10 +35,8 @@ import org.bouncycastle.operator.DigestCalculator;
 import org.bouncycastle.operator.OperatorCreationException;
 import org.bouncycastle.operator.bc.BcDigestCalculatorProvider;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 
-import net.litetex.hetzner.cloud.APIRequestException;
 import net.litetex.hetzner.cloud.CRUDTest;
 import net.litetex.hetzner.cloud.HetznerCloudAPI;
 import net.litetex.hetzner.cloud.certificate.response.Certificate;
@@ -110,21 +108,6 @@ class CertificatesTest extends CRUDTest<CertificatesAPI, Certificate>
 		Assertions.assertEquals(KEY_ID, certificate.name());
 		Assertions.assertEquals("y", certificate.labels().get("x"));
 		return certificate;
-	}
-	
-	@Override
-	protected void delete(final Certificate created)
-	{
-		final long id = created.id();
-		this.api.delete(id);
-		
-		Assertions.assertThrows(APIRequestException.class, () -> this.api.get(id));
-	}
-	
-	@AfterEach
-	void afterEach()
-	{
-		deleteAll(this.api);
 	}
 	
 	private X509Certificate generateCertificate(final KeyPair keyPair, final String hashAlgorithm, final String cn)

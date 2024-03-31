@@ -1,9 +1,7 @@
 package net.litetex.hetzner.cloud.firewall;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 
-import net.litetex.hetzner.cloud.APIRequestException;
 import net.litetex.hetzner.cloud.CRUDTest;
 import net.litetex.hetzner.cloud.HetznerCloudAPI;
 import net.litetex.hetzner.cloud.firewall.response.Firewall;
@@ -43,20 +41,5 @@ class FirewallsTest extends CRUDTest<FirewallsAPI, Firewall>
 		Assertions.assertEquals("y", firewall.labels().get("x"));
 		Assertions.assertEquals(1, firewall.firewallRules().size());
 		return firewall;
-	}
-	
-	@Override
-	protected void delete(final Firewall created)
-	{
-		final long id = created.id();
-		this.api.delete(id);
-		
-		Assertions.assertThrows(APIRequestException.class, () -> this.api.get(id));
-	}
-	
-	@AfterEach
-	void afterEach()
-	{
-		deleteAll(this.api);
 	}
 }

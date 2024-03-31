@@ -56,13 +56,15 @@ public abstract class CloudTest<A extends NestedAPI>
 		deleteAll(this.hetznerCloudAPI.volumes());
 	}
 	
-	protected static <A extends NestedReadAPI<? extends ListResponse<T>, T, ?, ?> & DeleteAPI,
+	protected static <
+		A extends NestedReadAPI<? extends ListResponse<T>, T, ?, ?> & DeleteAPI,
 		T extends HasID> void deleteAll(final A api)
 	{
 		deleteAll(api, (a, t) -> a.delete(t.id()));
 	}
 	
-	protected static <A extends NestedReadAPI<? extends ListResponse<T>, T, ?, ?>,
+	protected static <
+		A extends NestedReadAPI<? extends ListResponse<T>, T, ?, ?>,
 		T extends HasID> void deleteAll(final A api, final BiConsumer<A, T> deleteFunc)
 	{
 		api.listAllData().forEach(t -> deleteFunc.accept(api, t));
