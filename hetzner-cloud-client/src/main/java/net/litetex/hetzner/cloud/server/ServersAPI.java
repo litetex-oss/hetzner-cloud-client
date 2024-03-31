@@ -138,6 +138,11 @@ public class ServersAPI
 		return this.post("/" + id + "/actions/rebuild", rebuildServerRequest, RebuildServerResponse.class);
 	}
 	
+	public RebuildServerResponse rebuildServer(final long id, final long imageId)
+	{
+		return this.rebuildServer(id, String.valueOf(imageId));
+	}
+	
 	public RebuildServerResponse rebuildServer(final long id, final String image)
 	{
 		return this.rebuildServer(id, new RebuildServerRequest(image));

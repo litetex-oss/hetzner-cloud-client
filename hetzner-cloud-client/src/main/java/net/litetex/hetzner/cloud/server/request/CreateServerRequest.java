@@ -97,6 +97,11 @@ public record CreateServerRequest(
             return this;
         }
         
+        public Builder image(final long image)
+        {
+            return this.image(String.valueOf(image));
+        }
+        
         public Builder startAfterCreate(final boolean startAfterCreate)
         {
             this.startAfterCreate = startAfterCreate;
