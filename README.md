@@ -13,4 +13,4 @@ A java client for the [Hetzner Cloud API](https://docs.hetzner.cloud/)
 See the [contributing guide](./CONTRIBUTING.md) for detailed instructions on how to get started with our project.
 
 ## Dependencies and Licenses
-View the [license of the current project](LICENSE) or the [summary including all dependencies](https://litetex-oss.github.io/hetzner-cloud-client/dependencies/)
+View the [license of the current project](LICENSE) or the [summary including all dependencies](https://litetex-oss.github.io/hetzner-cloud-client/dependencies)
