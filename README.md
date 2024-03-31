@@ -4,7 +4,7 @@
 
 # hetzner-cloud-client
 
-A java client for the [Hetzner Cloud API](https://docs.hetzner.cloud/)
+A Java client for the [Hetzner Cloud API](https://docs.hetzner.cloud/)
 
 ## Installation
 [Installation guide for the latest release](https://github.com/litetex-oss/hetzner-cloud-client/releases/latest#Installation)
