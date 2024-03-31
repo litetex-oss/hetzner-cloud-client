@@ -65,6 +65,7 @@ target/
 #custom
 .flattened-pom.xml
 .tern-project
+!hetzner-cloud-client/src/main/java/net/litetex/hetzner/cloud/loadbalancer/shared/target/
 
 # == IntelliJ ==
 *.iml
