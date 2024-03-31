@@ -23,7 +23,8 @@ class FloatingIPsTest extends CRUDTest<FloatingIPsAPI, FloatingIP>
 	protected FloatingIP create()
 	{
 		return this.api.create(b -> b.name("test")
-				.ipType(IPType.IPv6))
+				.ipType(IPType.IPv6)
+				.homeLocation("nbg1"))
 			.floatingIP();
 	}
 	
