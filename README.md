@@ -4,10 +4,10 @@
 
 # hetzner-cloud-client
 
+A java client for the [Hetzner Cloud API](https://docs.hetzner.cloud/)
 
 ## Installation
 [Installation guide for the latest release](https://github.com/litetex-oss/hetzner-cloud-client/releases/latest#Installation)
-
 
 ## Contributing
 See the [contributing guide](./CONTRIBUTING.md) for detailed instructions on how to get started with our project.
